@@ -2,7 +2,11 @@
 #include <fstream>
 #include <cmath>
 #include <string>
-#include "Functions.cpp"
+#include "Functions.h"
+#include "Shape.h"
+#include "Point.h"
+#include "Triangle.h"
+#include <iomanip>
 
 int main(int argc, const char *argv[])
 {
@@ -12,8 +16,6 @@ int main(int argc, const char *argv[])
         return 0;
     }
 
-    double get = 0;
-    double sum = 0;
     int count = 0;
     std::string stringOfNumbers;
     std::ifstream f(argv[1]);
@@ -34,23 +36,33 @@ int main(int argc, const char *argv[])
         }
         count++;
     }
-    double *arrayOfNumbers = new double[count]; //Allocate a dynamic memory array
+    if (count % 2 != 0)
+    {
+        std::cout << "File is missing a coordinate" << std::endl;
+        return (EXIT_FAILURE);
+    }
+    Point *arrayOfCoords = new Point[count]; //Allocate a dynamic memory array
     f.clear();
     f.seekg(0); //Rewind the file
 
     int j = 0;
-    while (f >> get)
+    double x = 0;
+    double y = 0;
+    while (f >> x >> y)
     {
-        sum += get;                   // Get the sum
-        get = (int)(get * 1000 + .5); // Rounding
-        get = (get / 1000);           // convert into 3 decimals
-        arrayOfNumbers[j] = get;      // Insert numbers into array
+        Point p(x, y);
+        arrayOfCoords[j] = p;          // Insert integers into array
         j++;
     }
-    f.close();                      //Close file
-    for (int k = 0; k < count; k++) //Loop and prints the numbers that are above average
-        if (arrayOfNumbers[k] > (sum / count))
-            std::cout << arrayOfNumbers[k] << " ";
-    delete[] arrayOfNumbers; //Delete buffer to prevent memory leakage
+    f.close(); //Close file
+
+    Triangle myTriangle(arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2]);
+    std::cout << std::fixed;
+    std::cout << std::setprecision(3);
+    std::cout << "Area is " << myTriangle.getArea() << std::endl;
+    std::cout << "Circumference is " << myTriangle.getCircumreference() << std::endl;
+    std::cout << "Centerposition is (" << myTriangle.position().getX() << ", " << myTriangle.position().getY() << ")" << std::endl;
+
+    delete[] arrayOfCoords; //Delete buffer to prevent memory leakage
     return 0;
 }

@@ -1,10 +1,10 @@
 #include "Functions.h"
-#include <iostream>
-#include <string>
+#include "Shape.h"
 
 bool hasValidChars(std::string s)
 {
-    for (int i = 0; i < s.length(); i++) {
+    for (int i = 0; i < s.length(); i++)
+    {
         if (!isdigit(s[i]) && s[i] != '.' && s[i] != '+' && s[i] != '-')
             return false;
     }
