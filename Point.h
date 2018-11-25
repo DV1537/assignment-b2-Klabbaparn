@@ -11,11 +11,9 @@ class Point
     double getX() const { return m_x; }
     double getY() const { return m_y; }
 
-
   private:
     double m_x;
-    double m_y;
-    
+    double m_y; 
 };
 
 #endif // POINT_H

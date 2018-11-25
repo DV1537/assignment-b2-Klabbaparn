@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "Shape.h"
+
 
 bool hasValidChars(std::string s)
 {

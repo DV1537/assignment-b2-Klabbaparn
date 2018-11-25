@@ -1,6 +1,13 @@
 #include "Triangle.h"
 #include <cmath>
 #include "Point.h"
+#include <string>
+
+std::string Triangle::getType()
+{
+    std::string myShape = "Triangle";
+    return myShape;
+}
 
 double Triangle::getArea()
 {
@@ -12,14 +19,14 @@ double Triangle::getArea()
     return area;
 }
 
-double Triangle::getCircumreference()
+double Triangle::getCircumference()
 {
     double triangleCircum = 0;
     triangleCircum = sqrt(pow(m_p1.getX() - m_p2.getX(),2)+pow(m_p1.getY() - m_p2.getY(),2)+pow(m_p2.getX() - m_p3.getX(),2)+pow(m_p2.getY() - m_p3.getY(),2)+pow(m_p3.getX() - m_p1.getX(),2)+pow(m_p3.getY() - m_p1.getY(),2));
     return triangleCircum;
 }
 
-Point Triangle::position()
+Point Triangle::getPosition()
 {
     double sumX, sumY;
     sumX = (m_p1.getX()+m_p2.getX()+m_p3.getX())/3; 
