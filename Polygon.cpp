@@ -52,6 +52,10 @@ Point Polygon::getPosition() //I know this is off by a few, working on the corre
     return centerPosition;
 }
 
+bool Polygon::isConvex()
+{
+    return true;
+}
 
 /*Point Polygon::getPosition()
 {

@@ -59,9 +59,13 @@ int main(int argc, const char *argv[])
     }
     f.close(); //Close file
 
-    if(count > 6)
+    OnePoint myOnePoint(arrayOfCoords[0]);
+    Line myLine(arrayOfCoords[0], arrayOfCoords[1]);
+    Triangle myTriangle(arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2]);
+    Polygon myPolygon(arrayOfCoords, count);
+
+    if (count > 6)
     {
-        Polygon myPolygon(arrayOfCoords, count);
         std::cout << std::fixed;
         std::cout << std::setprecision(3);
         std::cout << "Shape is a " << myPolygon.getType() << std::endl;
@@ -69,9 +73,8 @@ int main(int argc, const char *argv[])
         std::cout << "Circumference is " << myPolygon.getCircumference() << std::endl;
         std::cout << "Centerposition is (" << myPolygon.getPosition().getX() << ", " << myPolygon.getPosition().getY() << ")" << std::endl;
     }
-    else if (count == 6)
+    if (count == 6)
     {
-        Triangle myTriangle(arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2]);
         std::cout << std::fixed;
         std::cout << std::setprecision(3);
         std::cout << "Shape is a " << myTriangle.getType() << std::endl;
@@ -79,9 +82,8 @@ int main(int argc, const char *argv[])
         std::cout << "Circumference is " << myTriangle.getCircumference() << std::endl;
         std::cout << "Centerposition is (" << myTriangle.getPosition().getX() << ", " << myTriangle.getPosition().getY() << ")" << std::endl;
     }
-    else if (count == 4)
+    if (count == 4)
     {
-        Line myLine(arrayOfCoords[0], arrayOfCoords[1]);
         std::cout << std::fixed;
         std::cout << std::setprecision(3);
         std::cout << "Shape is a " << myLine.getType() << std::endl;
@@ -89,9 +91,8 @@ int main(int argc, const char *argv[])
         std::cout << "Circumference is " << myLine.getCircumference() << std::endl;
         std::cout << "Centerposition is (" << myLine.getPosition().getX() << ", " << myLine.getPosition().getY() << ")" << std::endl;
     }
-    else if(count == 2)
+    if (count == 2)
     {
-        OnePoint myOnePoint(arrayOfCoords[0]);
         std::cout << std::fixed;
         std::cout << std::setprecision(3);
         std::cout << "Shape is a " << myOnePoint.getType() << std::endl;
@@ -99,6 +100,7 @@ int main(int argc, const char *argv[])
         std::cout << "Circumference is " << myOnePoint.getCircumference() << std::endl;
         std::cout << "Centerposition is (" << myOnePoint.getPosition().getX() << ", " << myOnePoint.getPosition().getY() << ")" << std::endl;
     }
+    std::cout << "The distance is " << myTriangle.distance(myLine) << std::endl;
 
     delete[] arrayOfCoords; //Delete buffer to prevent memory leakage
     return 0;

@@ -7,13 +7,13 @@
 class Shape
 {
 public:
-  virtual std::string getType() = 0; 
+  virtual std::string getType() = 0;
   virtual double getArea() = 0;
   virtual double getCircumference() = 0;
   virtual Point getPosition() = 0;
-  //virtual double distance(shape s)
-  //virtual bool isConvex() = 0;
-  virtual ~Shape() {}
+  double distance(Shape& s);
+  bool isConvex();
+  virtual ~Shape() {} 
         
 
 };

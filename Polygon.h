@@ -13,6 +13,7 @@ public:
   double getArea();
   double getCircumference();
   Point getPosition();
+  bool isConvex();
 
 private:
   Point* m_a;
