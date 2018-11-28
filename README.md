@@ -6,7 +6,7 @@ DV1537 Object-Oriented C++ Course
 
 ## General instructions
 
-1. Use GIT version control to manage your code and submit assignments unless specified otherwise (see separate instructions on how to set up and use GIT Classroom)
+1. Use git version control to manage your code and submit assignments unless specified otherwise (see separate instructions on how to set up and use GIT Classroom)
 2. Your program should use text files as the only input. No keyboard input is permitted. Path to the input file should be the first parameter to the program.
 3. Format output exactly as specified/exemplified in the assignment descriptions
 4. Follow good code writing practices:
