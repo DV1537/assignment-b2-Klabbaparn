@@ -12,7 +12,7 @@ std::string Triangle::getType()
 double Triangle::getArea()
 {
         double area = 0;
-        area = abs((m_p1.getX() * (m_p2.getY() - m_p3.getY()) + m_p2.getX() * (m_p3.getY() - m_p1.getY()) + m_p3.getX() * (m_p1.getY() - m_p2.getY()) / 2));
+        area = fabs((m_p1.getX() * (m_p2.getY() - m_p3.getY()) + m_p2.getX() * (m_p3.getY() - m_p1.getY()) + m_p3.getX() * (m_p1.getY() - m_p2.getY()) / 2));
         if (area == 0)
             area = -1;
         return area;

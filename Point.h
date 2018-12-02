@@ -3,13 +3,16 @@
 #include <string>
 #include <iostream>
 
-class Point
+class Point 
 {
   public:
     Point(double x, double y) : m_x(x), m_y(y) {}
     Point() : m_x(0), m_y(0) {}
-    double getX() const { return m_x; }
-    double getY() const { return m_y; }
+    const double getX() const { return m_x; }
+    const double getY() const { return m_y; }
+    void operator=(const Point &rhs);
+
+    
 
   private:
     double m_x;
