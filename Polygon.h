@@ -15,7 +15,10 @@ public:
   double getCircumference();
   Point getPosition();
   bool isConvex();
-  Polygon operator+(const Point &rhs);
+  Polygon operator+(const Point &rhs); //Adds one(1) coordinate to the polygon
+  Polygon operator+(const Polygon &rhs); //Adds two shapes(polygons)toghter
+  void operator=(const Polygon& rhs);
+  friend std::ostream& operator<<(std::ostream& os, const Polygon& rhs);
 
 private:
   Point* m_a = nullptr;

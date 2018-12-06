@@ -10,9 +10,8 @@ class Point
     Point() : m_x(0), m_y(0) {}
     const double getX() const { return m_x; }
     const double getY() const { return m_y; }
-    void operator=(const Point &rhs);
-
-    
+    void operator=(const Point& rhs);
+    friend std::ostream& operator<<(std::ostream& os, const Point& rhs);
 
   private:
     double m_x;

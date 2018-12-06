@@ -2,6 +2,7 @@
 #include "Point.h"
 #include "Line.h"
 #include <string>
+#include <iostream>
 
 std::string Line::getType()
 {
@@ -29,4 +30,16 @@ Point Line::getPosition()
     sumY = (m_p1.getY()+m_p2.getY())/2;
     Point centerPosition(sumX, sumY);
     return centerPosition;
+}
+
+std::ostream& operator<<(std::ostream& os, const Line& rhs)
+{
+    os << "(" << rhs.m_p1.getX() << "," << rhs.m_p1.getY() << ")" << " " << "(" << rhs.m_p2.getX() << "," << rhs.m_p2.getY() << ")"; 
+    return os;  
+}
+
+void Line::operator=(const Line& rhs)
+{
+    m_p1 = rhs.m_p1;
+    m_p2 = rhs.m_p2;
 }

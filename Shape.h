@@ -14,8 +14,7 @@ public:
   double distance(Shape& s);
   bool isConvex();
   virtual ~Shape() {} 
-
-        
+   
 };
 
 #endif // SHAPE_H

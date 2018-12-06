@@ -14,6 +14,8 @@ public:
   double getArea();
   double getCircumference();
   Point getPosition();
+  friend std::ostream& operator<<(std::ostream& os, const Line& rhs);
+  void operator=(const Line& rhs);
 
 private:
   Point m_p1;
