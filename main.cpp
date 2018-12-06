@@ -60,11 +60,11 @@ int main(int argc, const char *argv[])
     }
     f.close(); //Close file
 
-    /*OnePoint myOnePoint(arrayOfCoords[0]);
+    OnePoint myOnePoint(arrayOfCoords[0]);
     Line myLine(arrayOfCoords[0], arrayOfCoords[1]);
     Triangle myTriangle(arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2]);
-    Polygon myPolygon(arrayOfCoords, count);*/
-/*
+    Polygon myPolygon(arrayOfCoords, count);
+
     if (count > 3)
     {
         std::cout << std::fixed;
@@ -73,6 +73,10 @@ int main(int argc, const char *argv[])
         std::cout << "Area is " << myPolygon.getArea() << std::endl;
         std::cout << "Circumference is " << myPolygon.getCircumference() << std::endl;
         std::cout << "Centerposition is (" << myPolygon.getPosition().getX() << ", " << myPolygon.getPosition().getY() << ")" << std::endl;
+        if(!myPolygon.isConvex())
+        std::cout << "The polygon is concave" << std::endl;
+        else
+        std::cout << "The polygon is convex" << std::endl;
     }
     if (count == 3)
     {
@@ -101,19 +105,5 @@ int main(int argc, const char *argv[])
         std::cout << "Circumference is " << myOnePoint.getCircumference() << std::endl;
         std::cout << "Centerposition is (" << myOnePoint.getPosition().getX() << ", " << myOnePoint.getPosition().getY() << ")" << std::endl;
     }
-*/
-double a = 10;
-double b = 5;
-Point c(a,b);
-OnePoint m(c);
-OnePoint fe;
-fe = m;
-
-
-std::cout << m << std::endl;
-std::cout << fe << std::endl;
-
-
-
     return 0;
 }
