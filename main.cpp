@@ -8,7 +8,7 @@
 #include "Triangle.h"
 #include <iomanip>
 #include "Line.h"
-#include "OnePoint.h" //This is the shape-point
+#include "OnePoint.h" //This is the point-shape
 #include "Polygon.h"
 
 int main(int argc, const char *argv[])
