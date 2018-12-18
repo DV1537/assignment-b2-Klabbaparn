@@ -4,15 +4,16 @@
 #include <string>
 #include <iostream>
 
-std::string OnePoint::getType()
+std::string OnePoint::getType() const
 {
+	//Här har du använt std::string
     std::string myShape = "Point";
     return myShape;
 }
 
 double OnePoint::getArea()
 {
-        double area = -1;
+    double area = -1;
     return area;
 }
 
@@ -41,3 +42,11 @@ void OnePoint::operator=(const OnePoint& rhs)
 {
     m_p1 = rhs.m_p1;
 }
+
+std::string OnePoint::print() const
+{
+	return getType();
+}
+
+
+

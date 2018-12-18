@@ -4,15 +4,18 @@
 #include <string>
 #include "Functions.h"
 #include "Shape.h"
-#include "Point.h" //Vital class. Almost everything runs through this
+#include <sstream>
+#include "Point.h" 
 #include "Triangle.h"
 #include <iomanip>
+#include "Figure.h"
 #include "Line.h"
 #include "OnePoint.h" //This is the point-shape
 #include "Polygon.h"
 
 int main(int argc, const char *argv[])
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     if (argc < 2)
     {
         std::cout << "Wrong amount of arguments"; //fail-checking
@@ -45,65 +48,47 @@ int main(int argc, const char *argv[])
         return (EXIT_FAILURE);
     }
     count = count / 2;
-    Point *arrayOfCoords = new Point[count]; //Allocate a dynamic memory array
     f.clear();
     f.seekg(0); //Rewind the file
 
-    int j = 0;
-    double x = 0;
-    double y = 0;
-    while (f >> x >> y)
-    {
-        Point p(x, y);
-        arrayOfCoords[j] = p;
-        j++;
-    }
+	int coordCount = 0, j = 0, m = 0, lineCount = 0;
+	double x = 0, y = 0;
+	std::string line;
+	while (std::getline(f, line))
+		lineCount++;
+	f.clear();
+	f.seekg(0);
+	Polygon *arrayOfShapes = new Polygon[lineCount];
+	while (std::getline(f, line))
+	{
+		Point *arrayOfCoords = new Point[count];
+		std::istringstream iss(line);
+		{
+			while (iss >> x >> y)
+			{
+				Point p(x, y);
+				arrayOfCoords[j++] = p;
+				coordCount++;
+			}
+			Polygon poly(arrayOfCoords, coordCount);
+			arrayOfShapes[m++] = poly;
+			coordCount = 0;
+			j = 0;
+		}
+	}
+
     f.close(); //Close file
+	
 
-    OnePoint myOnePoint(arrayOfCoords[0]);
-    Line myLine(arrayOfCoords[0], arrayOfCoords[1]);
-    Triangle myTriangle(arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2]);
-    Polygon myPolygon(arrayOfCoords, count);
+	Figure Figgy;
+	Figgy.addShape(&arrayOfShapes[0]);
+	Figgy.addShape(&arrayOfShapes[1]);
+	Figgy.addShape(&arrayOfShapes[2]);
+	std::cout << Figgy << std::endl;
+	Figgy.getBoundingBox();
 
-    if (count > 3)
-    {
-        std::cout << std::fixed;
-        std::cout << std::setprecision(3);
-        std::cout << "Shape is a " << myPolygon.getType() << std::endl;
-        std::cout << "Area is " << myPolygon.getArea() << std::endl;
-        std::cout << "Circumference is " << myPolygon.getCircumference() << std::endl;
-        std::cout << "Centerposition is (" << myPolygon.getPosition().getX() << ", " << myPolygon.getPosition().getY() << ")" << std::endl;
-        if(!myPolygon.isConvex())
-        std::cout << "The polygon is concave" << std::endl;
-        else
-        std::cout << "The polygon is convex" << std::endl;
-    }
-    if (count == 3)
-    {
-        std::cout << std::fixed;
-        std::cout << std::setprecision(3);
-        std::cout << "Shape is a " << myTriangle.getType() << std::endl;
-        std::cout << "Area is " << myTriangle.getArea() << std::endl;
-        std::cout << "Circumference is " << myTriangle.getCircumference() << std::endl;
-        std::cout << "Centerposition is (" << myTriangle.getPosition().getX() << ", " << myTriangle.getPosition().getY() << ")" << std::endl;
-    }
-    if (count == 2)
-    {
-        std::cout << std::fixed;
-        std::cout << std::setprecision(3);
-        std::cout << "Shape is a " << myLine.getType() << std::endl;
-        std::cout << "Area is " << myLine.getArea() << std::endl;
-        std::cout << "Circumference is " << myLine.getCircumference() << std::endl;
-        std::cout << "Centerposition is (" << myLine.getPosition().getX() << ", " << myLine.getPosition().getY() << ")" << std::endl;
-    }
-    if (count == 1)
-    {
-        std::cout << std::fixed;
-        std::cout << std::setprecision(3);
-        std::cout << "Shape is a " << myOnePoint.getType() << std::endl;
-        std::cout << "Area is " << myOnePoint.getArea() << std::endl;
-        std::cout << "Circumference is " << myOnePoint.getCircumference() << std::endl;
-        std::cout << "Centerposition is (" << myOnePoint.getPosition().getX() << ", " << myOnePoint.getPosition().getY() << ")" << std::endl;
-    }
+	delete[] arrayOfShapes;
+	arrayOfShapes = nullptr;
+
     return 0;
-}
+}  

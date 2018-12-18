@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-std::string Triangle::getType()
+std::string Triangle::getType() const
 {
     std::string myShape = "Triangle";
     return myShape;
@@ -47,4 +47,9 @@ void Triangle::operator=(const Triangle& rhs)
     m_p1 = rhs.m_p1;
     m_p2 = rhs.m_p2;
     m_p3 = rhs.m_p3;
+}
+
+std::string Triangle::print() const
+{
+	return getType(); 
 }

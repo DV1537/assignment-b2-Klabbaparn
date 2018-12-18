@@ -10,10 +10,11 @@ class OnePoint : public Shape
 public:
   OnePoint(Point q) : m_p1(q) {}
   OnePoint() : m_p1(0, 0) {}
-  std::string getType();
+  std::string getType() const;
   double getArea();
   double getCircumference();
   Point getPosition();
+  std::string print() const;
   friend std::ostream& operator<<(std::ostream& os, const OnePoint& rhs);
   void operator=(const OnePoint& rhs);
 

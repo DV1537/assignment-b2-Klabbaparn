@@ -3,8 +3,16 @@
 #include "Point.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
-std::string Polygon::getType()
+Polygon::Polygon(const Polygon &obj) {
+	m_c = obj.m_c;
+	this->m_a = new Point[obj.m_c];
+	for (int i = 0; i < obj.m_c; i++)
+		this->m_a[i] = obj.m_a[i];
+}
+
+std::string Polygon::getType() const
 {
     std::string myShape = "Polygon";
     return myShape;
@@ -112,13 +120,51 @@ Polygon Polygon::operator+(const Polygon& rhs)
 
 std::ostream& operator<<(std::ostream& os, const Polygon& rhs)
 {
-    for(int i = 0; i < rhs.m_c; i++)
-    os << "(" << rhs.m_a[i].getX() << "," << rhs.m_a[i].getY() << ") ";
+	os << rhs.print();
     return os;
 }
 
-void Polygon::operator=(const Polygon& rhs)
+void Polygon::operator=(const Polygon &rhs)
 {
-    m_a = rhs.m_a;
-    m_c = rhs.m_c;
+	m_c = rhs.m_c;
+	m_a = new Point[rhs.m_c];
+	for (int k = 0; k < rhs.m_c; k++)
+		m_a[k] = rhs.m_a[k];
+}
+
+std::string Polygon::print() const
+{
+	std::stringstream ss;
+	for (int i = 0; i < m_c; i++)
+		ss << "(" << m_a[i].getX() << "," << m_a[i].getY() << ") ";
+
+	return ss.str();
+}
+
+BoundBox Polygon::getBoundingBox()
+{
+	double xMin = m_a[0].getX();
+	double yMax = m_a[0].getY();
+	double xMax = m_a[0].getX();
+	double yMin = m_a[0].getY();
+	
+	for (int i = 0; i < m_c; i++)
+	{
+		if (xMax < m_a[i].getX())
+			xMax = m_a[i].getX();
+		if (xMin > m_a[i].getX())
+			xMin = m_a[i].getX();
+		if (yMax < m_a[i].getY())
+			yMax = m_a[i].getY();
+		if (yMin > m_a[i].getY())
+			yMin = m_a[i].getY();
+	}
+	
+	BoundBox bb;
+	Point upperL(xMin, yMax);
+	Point lowerR(xMax, yMin);
+	bb.upperLeft = upperL;
+	bb.lowerRight = lowerR;
+
+	return bb;
 }

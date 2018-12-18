@@ -3,8 +3,9 @@
 #include "Line.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
-std::string Line::getType()
+std::string Line::getType() const
 {
     std::string myShape = "Line";
     return myShape;
@@ -43,3 +44,16 @@ void Line::operator=(const Line& rhs)
     m_p1 = rhs.m_p1;
     m_p2 = rhs.m_p2;
 }
+
+std::string Line::print() const
+{
+	std::string s = getType();
+	std::stringstream ss;
+	ss << s;
+	ss << "my extra information about this line: " << m_p1.getX();
+
+	return ss.str();
+}
+
+
+

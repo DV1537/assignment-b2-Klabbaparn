@@ -4,17 +4,27 @@
 #include "Point.h"
 #include "Functions.h"
 
+struct BoundBox 
+{
+	Point upperLeft;
+	Point lowerRight;
+};
+
 class Shape
 {
 public:
-  virtual std::string getType() = 0;
+  Shape() {}
+  virtual ~Shape() {}
+  virtual std::string getType() const = 0;
   virtual double getArea() = 0;
   virtual double getCircumference() = 0;
   virtual Point getPosition() = 0;
+  virtual std::string print() const = 0;
   double distance(Shape& s);
   bool isConvex();
-  virtual ~Shape() {} 
-   
+
+private:
+	Shape(const Shape& rhs);
 };
 
 #endif // SHAPE_H

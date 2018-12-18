@@ -10,10 +10,11 @@ class Line : public Shape
 public:
   Line(Point q, Point w) : m_p1(q), m_p2(w) {}
   Line() : m_p1(0, 0), m_p2(0, 0){}
-  std::string getType();
+  std::string getType() const;
   double getArea();
   double getCircumference();
   Point getPosition();
+  std::string print() const;
   friend std::ostream& operator<<(std::ostream& os, const Line& rhs);
   void operator=(const Line& rhs);
 
