@@ -8,6 +8,8 @@
 #include <iostream>
 #include "Figure.h"
 #include "Point.h"
+#include <sstream>
+#include "Functions.h"
 
 static const int initListSize = 20;
 
@@ -34,7 +36,7 @@ void Figure::addShape(Polygon* s)
 	}
 }
 
-void Figure::getBoundingBox()
+BoundBox Figure::getBoundingBox()
 {
 	BoundBox ret;
 	double xMin = 0;
@@ -60,8 +62,7 @@ void Figure::getBoundingBox()
 	Point lowerR(xMax, yMin);
 	finalReturn.upperLeft = upperL;
 	finalReturn.lowerRight = lowerR;
-
-	std::cout << "(" << finalReturn.upperLeft.getX() << "," << finalReturn.upperLeft.getY() << ")" << " " << "(" << finalReturn.lowerRight.getX() << "," << finalReturn.lowerRight.getY() << ")" << std::endl;
+	return finalReturn;
 }
 
 std::ostream& operator<<(std::ostream& os, const Figure& rhs)
@@ -71,4 +72,23 @@ std::ostream& operator<<(std::ostream& os, const Figure& rhs)
 		os <<  s->print() << std::endl;
 	}
 	return os;
+}
+
+void Figure::getClosest(Polygon* location, int n)
+{
+	DistPoly* arr = new DistPoly[m_arrLength];
+	for (int i = 0; i < m_arrLength; i++)
+	{
+		Polygon* s = m_arr[i];
+		double b = location->distance(*s);
+		arr[i].distance = b;
+		arr[i].ptr = s;
+	}
+	int low = 0;
+	int high = m_arrLength-1;
+	sort(arr, low, high);
+	for (int i = 1; i < n+1; i++)
+		std::cout << arr[i].ptr->print() << std::endl;
+	delete[] arr;
+	arr = nullptr;
 }

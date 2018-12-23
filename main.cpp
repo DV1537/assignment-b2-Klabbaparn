@@ -53,6 +53,7 @@ int main(int argc, const char *argv[])
 
 	int coordCount = 0, j = 0, m = 0, lineCount = 0;
 	double x = 0, y = 0;
+	int shapeCount = 0;
 	std::string line;
 	while (std::getline(f, line))
 		lineCount++;
@@ -72,6 +73,7 @@ int main(int argc, const char *argv[])
 			}
 			Polygon poly(arrayOfCoords, coordCount);
 			arrayOfShapes[m++] = poly;
+			shapeCount++;
 			coordCount = 0;
 			j = 0;
 		}
@@ -79,14 +81,19 @@ int main(int argc, const char *argv[])
 
     f.close(); //Close file
 	
-
 	Figure Figgy;
-	Figgy.addShape(&arrayOfShapes[0]);
+	Figgy.addShape(&arrayOfShapes[0]); 
 	Figgy.addShape(&arrayOfShapes[1]);
 	Figgy.addShape(&arrayOfShapes[2]);
-	std::cout << Figgy << std::endl;
-	Figgy.getBoundingBox();
-
+	Figgy.addShape(&arrayOfShapes[3]);
+	Figgy.addShape(&arrayOfShapes[4]);
+	Figgy.addShape(&arrayOfShapes[5]);
+	Figgy.addShape(&arrayOfShapes[6]);
+	Figgy.addShape(&arrayOfShapes[7]);
+	
+	int NrOfShapesToGet = 3;
+	Figgy.getClosest(&arrayOfShapes[0], NrOfShapesToGet);
+	
 	delete[] arrayOfShapes;
 	arrayOfShapes = nullptr;
 

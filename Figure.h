@@ -15,7 +15,8 @@ public:
 	Figure() {};
 	~Figure() { delete[] m_arr; };
 	void addShape(Polygon* s);
-	void getBoundingBox();
+	BoundBox getBoundingBox();
+	void getClosest(Polygon* location, int n);
 	friend std::ostream& operator<<(std::ostream& os, const Figure& rhs);
 
 private:
